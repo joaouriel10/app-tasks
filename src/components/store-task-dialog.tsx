@@ -87,7 +87,6 @@ export function StoreTaskDialog({ isOpen, setIsOpen }: StoreTaskDialogProps) {
       })
       toast.success('Tarefa criada com sucesso!')
     } catch (e) {
-      console.log(e)
       toast.error('Erro ao criar tarefa, tente novamente')
     }
   }

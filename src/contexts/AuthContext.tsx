@@ -1,8 +1,9 @@
 'use client'
 
 import { api } from '@/lib/axios'
+import { queryClient } from '@/lib/react-query'
 import { useRouter } from 'next/router'
-import { setCookie, destroyCookie, parseCookies } from 'nookies'
+import { setCookie, destroyCookie } from 'nookies'
 import { ReactNode, createContext } from 'react'
 
 type SignInData = {
@@ -41,9 +42,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setCookie(undefined, 'Zhavia-tasks@token', token, { maxAge: 60 * 60 * 24 })
   }
 
-  function signOut() {
+  async function signOut() {
     destroyCookie(undefined, 'Zhavia-tasks@token')
-    router.push('/sign-in')
+    await router.push('/sign-in')
+    queryClient.removeQueries()
   }
 
   return (
